@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "quick_commands",
+	"version": "${version}",
+	"name": "quick_commands",
+	"description": "자주쓰는명령어빠르게쓰게해주는모드",
+	"authors": [
+		"chstone12"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "내꺼임 ㅡㅡ (2차배포 시 사망)",
+	"icon": "assets/quick_commands/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "chstone12.quick_commands.quick_commands"
+		],
+		"client": [
+			"chstone12.quick_commands.Quick_commandsClient"
+		]
+	},
+	"mixins": [
+		"quick_commands.mixins.json",
+		{
+			"config": "quick_commands.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21.4",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

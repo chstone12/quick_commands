@@ -1,0 +1,51 @@
+
+
+
+
+	x /q (아이템번호) - 해당되는 템 주기 ( /q 46 64 = /give @s tnt 64 || /q 46 = /give @s tnt )
+	x /q s (이름) - 스코어보드 오브젝티브 추가 ( /q s variables = /scoreboard objectives add variables dummy )
+												( /q s death m.used..m.diamond_pickaxe = /scoreboard objectives add death minecraft.used:minecraft.diamond_pickaxe )
+	x /q se (숫자/템이름) - 아이템 번호 검색 ( /q se command_block -> 137 )
+	x /q see (숫자/엔티티이름) - 엔티티 번호 검색 ( /q see cr -> 50 )
+	x /q t (숫자) - 시간 설정 ( /q t 16999 = /time set 16999 )
+	x /q sm (엔티티이름) - 엔티티소환 ( /q sm cr = /summon creeper )
+	x /q sm (엔티티이름) (태그) - 태그있는 엔티티 소환 ( /q sm cr mob = /summon creeper ~ ~ ~ {Tags:["mob"]} )
+	x /q sm (엔티티이름) (태그) (태그2) - 태그있는 엔티티 소환 ( /q sm cr mob creeper = /summon creeper ~ ~ ~ {Tags:["mob","creeper"]} )
+	x /q ts (엔티티이름) (태그) - 테스트용 엔티티 소환 ( /q sm cr mob t = /summon creeper ~ ~ ~ {Tags:["mob"],NoAI:1,Silent:1} )
+	x /q ts (엔티티이름) (태그) (태그2) - ( /q sm cr mob creeper = /summon creeper ~ ~ ~ {Tags:["mob","creeper"],NoAI:1,Silent:1} )
+	x /q smb (블럭이름; 블럭번호 써도됨) (태그) - 블럭 디스플레이 소환 ( /q smb stone bdp = /summon block_display ~ ~ ~ {block_state:{Name:"stone",Tags:["bdp"]}} )
+	x /q smi (아이템이름; 아이템번호도 됨) (태그) - 아이템 디스플레이 소환 ( /q smi 1 idp = /summon item_display ~ ~ ~ {block_state:{Name:"stone"},Tags:["idp"]} )
+	x /q smt (텍스트; json) (태그) - 텍스트 디스플레이 소환 ( /q smt '{"text":"마플169","color":"red"}' tdp = /summon text_display ~ ~ ~ {text:'{"text":"마플169","color":"red"}',Tags:["tdp"]}
+	x /q ta (태그) - 태그 추가 ( /q ta enemy = /tag @n[type=!player] add enemy )
+	x /q ta r (태그) - 태그 제거 ( /q ta enemy r = /tag @n[tag=enemy] remove enemy )
+	x /q ta l - 가장 가까운 엔티티 태그 목록 보기
+	x /q ench - 마검 만들기 ( /q ench = /enchantall )
+	x /q rt (텍스트) - 무지개색 텍스트
+	x /q gd (색1) (색2) (텍스트) - 그라데이션
+	x /q gr c - 게임룰을 맵 제작에 용이하게 변경
+	x /q gr d - 게임룰을 원래대로 변경
+	x /q gen (?) - 자주 쓰이는 커맨드 생성하기
+    x /q yt - 유튜브 컨텐츠 추천
+	x /q food - 레시피 그거
+	x /q sent - 문장 만들기
+    x /q k - 가장 가까운 엔티티 죽이기
+
+    x /qd (숫자) - 체력 설정
+	x /qd (NBT) - data merge ( /qd background 0 = /data merge entity @n[type=!player] {background:0} )
+	x /qd inv - 인버너러블 추가 ( /qd inv = /data merge entity @n[type=!player] {Invulnerable:1b} )
+	x /qd ai - 인공지능 빼기 ( /qd ai = /data merge entity @n[type=!player] {NoAI:1} )
+	x /qd t - 테스트용 엔티티로 만들기 ( /qd t = /data merge entity @n[type=!player] {NoAI:1,Silent:1b} )
+	x /qd as - 아머스탠드용 데이터 추가 ( /qd as = /data merge entity @n[type=armor_stand] {Invulnerable:1b,NoBasePlate:1b,ShowArms:1b,NoGravity:1b} )
+    x /qd i [숫자 2개] - 인터렉션 가로세로 조절하기
+
+	/q sorry = /tellraw @s "안녕하세요 저는 치지직에서 방송을 하고 있는 스트리머 케인입니다. 먼저 저의 말과 행동으로 인해 큰 피해를 끼치고 실망을 드린 샌드백님, 시청자 분들께 죄송합니다. 지금부터는"
+	/q truth = /tellraw @s "마인애플 169.9"
+	/q false = /tellraw @s "마인애플 170"
+	/q tp = /tellraw @s "그정도는 그냥 치시죠..."
+	/q wer = /tellraw @s {"clickEvent":{"action":"run_command","value":"https://www.youtube.com/@QWER_Band_official"},"text":"QWER?","underlined":true,"color":"aqua"}
+	/q tuber = /tellraw @s "1997년 9월 11일!"
+	/q sm bd = /tellraw @s "죽음의 삼지선다! DBMS vs DSBM vs BDSM  (셋 중 하나는 진짜 '죽음'임)"
+	/q = /tellraw @s ["자주 쓰이는 커맨드를 더 빠르게 칠 수 있게 해줍니다. /q h를 치시면 사용할 수 있는 명령어들을 보여줍니다. 싱글 전용이라서 멀티에서 자주 쓰이는 커맨드는 지원하지 않습니다. (애초에 서버에선 이거 못씁니다.)\n\n서버에 각종 기능을 추가해 주는 ",{"text":"제가 만든 다른 플러그인","underlined":true,"color":"blue","bold":true,"clickEvent":{"action":"open_url","value":'https://drive.google.com/file/d/1uyGYOYv-nB-hOKWA6pcWpuPnxSIxGvcy/view?usp=sharing"}},"도 사용해 보세요."]
+
+
+	/qh (구문) - help
