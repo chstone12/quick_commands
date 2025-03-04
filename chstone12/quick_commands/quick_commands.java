@@ -75,7 +75,7 @@ public class quick_commands implements ModInitializer {
 		}
 
 	나무위키에서 Fabric 공식 튜토리얼 사이트 링크 안걸어줬으면 진짜 하루종일 프로젝트 세팅만 했겠다.
-	Gradle 미친색기들이 왜 자바 버전 맞췄는데도 안 되고 지랄이냐
+	Gradle 이색기들이 왜 자바 버전 맞췄는데도 안 되냐
 
 
 	*/
