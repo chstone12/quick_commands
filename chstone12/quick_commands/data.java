@@ -21,6 +21,14 @@ public class data extends quick_commands {
         if(args2 == null) elem = "null";
         else elem = args2.toString();
 
+        path = path.replace("tr-", "transformation").replace("trs-", "transformation.scale")
+                .replace("trt-", "transformation.translation").replace("trr-", "transformation.right_rotation")
+                .replace("trl-", "transformation.left_rotation").replace("max-", "attributes[{id:\"minecraft:max_health\"}].base");
+
+        elem = elem.replace("tr-", "transformation").replace("trs-", "transformation.scale")
+                .replace("trt-", "transformation.translation").replace("trr-", "transformation.right_rotation")
+                .replace("trl-", "transformation.left_rotation").replace("max-", "attributes[{id:\"minecraft:max_health\"}].base");
+
         // 체력 바꾸기
         if(is_this_number(path.replace(".", ""))) {
 
@@ -60,9 +68,16 @@ public class data extends quick_commands {
 
         // 테스트로
         else if(path.equals("t")) {
-            String command2 = "/tellraw @a[tag=quick_command_executor] [\"" + chat + "가장 가까운 엔티티인 \",{\"color\":\"green\",\"selector\":\"@n[type=!player]\"},\"의 NoAI와 Silent를 1로 설정했습니다.\"]";
+            String command2 = "/tellraw @a[tag=quick_command_executor] [\"" + chat + "가장 가까운 엔티티인 \",{\"color\":\"green\",\"selector\":\"@n[type=!player]\"},\"의 NoAI와 Silent, PersistenceRequired를 1로 설정했습니다.\"]";
             if(!send_feedback(context)) command2 = "";
-            run_commands("execute at @a[tag=quick_command_executor] run data merge entity @n[type=!player] {NoAI:1b,Silent:1b}", command2, "", context);
+            run_commands("execute at @a[tag=quick_command_executor] run data merge entity @n[type=!player] {NoAI:1b,Silent:1b,PersistenceRequired:1b}", command2, "", context);
+        }
+
+
+        else if(path.equals("ti")) {
+            String command2 = "/tellraw @a[tag=quick_command_executor] [\"" + chat + "가장 가까운 엔티티인 \",{\"color\":\"green\",\"selector\":\"@n[type=!player]\"},\"의 NoAI와 Silent, PersistenceRequired, Invulnerable을 1로 설정했습니다.\"]";
+            if(!send_feedback(context)) command2 = "";
+            run_commands("execute at @a[tag=quick_command_executor] run data merge entity @n[type=!player] {NoAI:1b,Silent:1b,PersistenceRequired:1b,Invulnerable:1b}", command2, "", context);
         }
 
 
@@ -70,6 +85,13 @@ public class data extends quick_commands {
         else if(path.equals("as")) {
             context.getSource().method_9226(() -> class_2561.method_43470(chat + "가장 가까운 아머스탠드의 NoGravity, NoBasePlate, ShowArms, Invulnerable을 1로 설정했습니다."), false);
             run_command("execute at @a[tag=quick_command_executor] run data merge entity @n[type=armor_stand] {NoBasePlate:1,NoGravity:1b,ShowArms:1b,Invulnerable:1b}", context);
+        }
+
+        else if(path.equals("pr")) {
+            String command2 = "/tellraw @a[tag=quick_command_executor] [\"" + chat + "가장 가까운 엔티티인 \",{\"color\":\"green\",\"selector\":\"@n[type=!player]\"},\"의 PersistenceRequired를 1로 설정했습니다.\"]";
+            if(!send_feedback(context)) command2 = "";
+            run_commands("execute at @a[tag=quick_command_executor] run data merge entity @n[type=!player] {PersistenceRequired:1b}", command2, "", context);
+
         }
 
 
@@ -147,6 +169,14 @@ public class data extends quick_commands {
         }
 
 
+        else if(path.equals("g")) {
+
+            if(elem.equals("null")) run_command("/execute as @a[tag=quick_command_executor] at @s run tellraw @s [\"\\u00A7e[QuickCommands]\\u00A7f 가장 가까운 엔티티인 \",{\"selector\":\"@n[type=!player]\",\"color\":\"green\"},\"의 NBT는 다음과 같습니다.\\n\",{\"nbt\":\"\",\"entity\":\"@n[type=!player]\",\"color\":\"aqua\"}]", context);
+            else run_command("/execute as @a[tag=quick_command_executor] at @s run tellraw @s [\"\\u00A7e[QuickCommands]\\u00A7f 가장 가까운 엔티티인 \",{\"selector\":\"@n[type=!player]\",\"color\":\"green\"},\"의 §b%s§f은(는) 다음과 같습니다.\\n\",{\"nbt\":\"%s\",\"entity\":\"@n[type=!player]\",\"color\":\"light_purple\"}]".formatted(elem.replace("\"", ""), elem.replace("\"", "")), context);
+
+        }
+
+
 
         // 기타
         else {
@@ -158,9 +188,7 @@ public class data extends quick_commands {
 
             else {
 
-                path = path.replace("tr-", "transformation").replace("trs-", "transformation.scale")
-                        .replace("trt-", "transformation.translation").replace("trr-", "transformation.right_rotation")
-                        .replace("trl-", "transformation.left_rotation").replace("max-", "attributes[{id:\"minecraft:max_health\"}].base");
+
 
 
                 String command2 = "/tellraw @a[tag=quick_command_executor] [\"" + chat + "\",{\"selector\":\"@n[type=!player]\"},\"의 §a" + path.replace("\"", "") + "§f을(를) §b" + elem.replace("\"", "") +  "§f(으)로 설정했습니다.\"]";

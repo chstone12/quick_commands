@@ -33,11 +33,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Objects;
 
 import static chstone12.quick_commands.data.set_entity_data;
 import static chstone12.quick_commands.functions.*;
 import static chstone12.quick_commands.help.quick_command_help;
+import static chstone12.quick_commands.write.write_text;
 
 
 public class quick_commands implements ModInitializer {
@@ -50,14 +53,14 @@ public class quick_commands implements ModInitializer {
 
 
 	// This logger is used to write text to the console and the log file.
-	// It is considered best practice to use your mod id as the logger's name.
-	// That way, it's clear which mod wrote info, warnings, and errors.
+	// It is considered best practice to use your mod id as the loggers name.
+	// That way, its clear which mod wrote info, warnings, and errors.
 
 	/*
 
 	else if(args1.equals("test")) {
 
-			// 와 씨발 됐다1!!!!111120ㅑㄷ90-9ㅑ3201-4789023ㅕㄹ8ㅑㅐ;ㅇ너ㅑㅏㄹ;ㅓㅑ ㅐㅓ;ㅑㅈㄷ ㄹ더ㅑㅐ러쟈ㅐ러 ㅈㄷㄹ ;ㅐ'
+			// 와 씨발 됐다1!!!!111120ㅑㄷ90-9ㅑ3201-4789023ㅕㄹ8ㅑㅐ;ㅇ너ㅑㅏㄹ;ㅓㅑ ㅐㅓ;ㅑㅈㄷ ㄹ더ㅑㅐ러쟈ㅐ러 ㅈㄷㄹ ;ㅐ
 			// 대 C H A T G P T 마크 ㅗㅁ드도만들어줕ㅋ네
 
 			BlockState block = Blocks.COMMAND_BLOCK.getDefaultState();
@@ -66,7 +69,7 @@ public class quick_commands implements ModInitializer {
 			sauce.getWorld().setBlockState(pos, block);
 
 			if (context.getSource().getWorld().getBlockEntity(pos) instanceof CommandBlockBlockEntity commandBlock) {
-				commandBlock.getCommandExecutor().setCommand("제발 돼라");
+				commandBlock.getCommandExecutor().setCommand("/tellraw @a \"됐냐?\"");
 				commandBlock.setAuto(true);
 				commandBlock.markDirty();
 			}
@@ -75,7 +78,7 @@ public class quick_commands implements ModInitializer {
 		}
 
 	나무위키에서 Fabric 공식 튜토리얼 사이트 링크 안걸어줬으면 진짜 하루종일 프로젝트 세팅만 했겠다.
-	Gradle 이색기들이 왜 자바 버전 맞췄는데도 안 되냐
+	Gradle 미친색기들이 왜 자바 버전 맞췄는데도 안 되고 지랄이냐
 
 
 	*/
@@ -90,34 +93,37 @@ public class quick_commands implements ModInitializer {
 
 		LOGGER.info("Hello Fabric world!");
 
-		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
-			dispatcher.register(class_2170.method_9247("q")
-					.executes(context -> executeCommon("null", "null", "null", "null", "null", context))
-					.then(class_2170.method_9244("args1", StringArgumentType.string())
-							.executes(context -> executeCommon(StringArgumentType.getString(context, "args1"), "null", "null", "null", "null", context))
-							.then(class_2170.method_9244("args2", StringArgumentType.string())
-									.executes(context -> executeCommon(
-											StringArgumentType.getString(context, "args1"),
-											StringArgumentType.getString(context, "args2"), "null", "null", "null", context))
-									.then(class_2170.method_9244("args3", StringArgumentType.string())
-									.executes(context -> executeCommon(StringArgumentType.getString(context, "args1"), StringArgumentType.getString(context, "args2"), StringArgumentType.getString(context, "args3"), "null", "null", context))
-										.then(class_2170.method_9244("args4", StringArgumentType.string())
-											.executes(context -> executeCommon(StringArgumentType.getString(context, "args1"), StringArgumentType.getString(context, "args2"), StringArgumentType.getString(context, "args3"), StringArgumentType.getString(context, "args4"), "null", context))
-												.then(class_2170.method_9244("args5", StringArgumentType.string())
-														.executes(context -> executeCommon(StringArgumentType.getString(context, "args1"), StringArgumentType.getString(context, "args2"), StringArgumentType.getString(context, "args3"), StringArgumentType.getString(context, "args4"), StringArgumentType.getString(context, "args5"), context)))
+
+			CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+				dispatcher.register(class_2170.method_9247("q")
+						.executes(context -> executeCommon("null", "null", "null", "null", "null", context))
+						.then(class_2170.method_9244("args1", StringArgumentType.string())
+								.executes(context -> executeCommon(StringArgumentType.getString(context, "args1"), "null", "null", "null", "null", context))
+								.then(class_2170.method_9244("args2", StringArgumentType.string())
+										.executes(context -> executeCommon(
+												StringArgumentType.getString(context, "args1"),
+												StringArgumentType.getString(context, "args2"), "null", "null", "null", context))
+										.then(class_2170.method_9244("args3", StringArgumentType.string())
+												.executes(context -> executeCommon(StringArgumentType.getString(context, "args1"), StringArgumentType.getString(context, "args2"), StringArgumentType.getString(context, "args3"), "null", "null", context))
+												.then(class_2170.method_9244("args4", StringArgumentType.string())
+														.executes(context -> executeCommon(StringArgumentType.getString(context, "args1"), StringArgumentType.getString(context, "args2"), StringArgumentType.getString(context, "args3"), StringArgumentType.getString(context, "args4"), "null", context))
+														.then(class_2170.method_9244("args5", StringArgumentType.string())
+																.executes(context -> executeCommon(StringArgumentType.getString(context, "args1"), StringArgumentType.getString(context, "args2"), StringArgumentType.getString(context, "args3"), StringArgumentType.getString(context, "args4"), StringArgumentType.getString(context, "args5"), context)))
 												)))));
 
-			dispatcher.register(class_2170.method_9247("qd")
-					.then(class_2170.method_9244("args1", class_2203.method_9360())
-							.executes(context -> set_entity_data(class_2203.method_9358(context, "args1"), null, context))
-							.then(class_2170.method_9244("args2", class_2212.method_9389())
-									.executes(context -> set_entity_data(class_2203.method_9358(context, "args1"), class_2212.method_9390(context, "args2"), context)))));
+				dispatcher.register(class_2170.method_9247("qd")
+						.then(class_2170.method_9244("args1", class_2203.method_9360())
+								.executes(context -> set_entity_data(class_2203.method_9358(context, "args1"), null, context))
+								.then(class_2170.method_9244("args2", class_2212.method_9389())
+										.executes(context -> set_entity_data(class_2203.method_9358(context, "args1"), class_2212.method_9390(context, "args2"), context)))));
 
-			dispatcher.register(class_2170.method_9247("qh")
-					.then(class_2170.method_9244("command", StringArgumentType.string())
-							.suggests(new suggestions_help())
-							.executes(context -> quick_command_help(StringArgumentType.getString(context, "command"), context))));
-		});
+				dispatcher.register(class_2170.method_9247("qh")
+						.then(class_2170.method_9244("command", StringArgumentType.string())
+								.suggests(new suggestions_help())
+								.executes(context -> quick_command_help(StringArgumentType.getString(context, "command"), context))));
+			});
+
+
 
 	}
 
@@ -132,8 +138,13 @@ public class quick_commands implements ModInitializer {
 		class_3218 world = sauce.method_9225();
 
 		if (args1.equals("null")) {
-			context.getSource().method_45068(class_2561.method_43470("").method_27693("자주 쓰이는 커맨드를 더 빠르게 칠 수 있게 해줍니다. /qh를 치시면 사용할 수 있는 명령어들을 보여줍니다. 싱글 전용이라서 멀티에서 자주 쓰이는 커맨드는 지원하지 않습니다. (애초에 서버에선 이거 못씁니다.)\n\nComponent 관련은 그냥 NBTAutoComplete 모드로...\n\n서버에 몇가지 기능을 추가해 주는 ").method_10862(class_2583.field_24360).method_27693("제가 만든 플러그인").method_10862(class_2583.field_24360.method_10982(true).method_10977(class_124.field_1078).method_30938(true).method_10958(new class_2558(class_2558.class_2559.field_11749, "https://drive.google.com/file/d/1uyGYOYv-nB-hOKWA6pcWpuPnxSIxGvcy/view?usp=sharing"))).method_27693("도 사용해 보세요.").method_10862(class_2583.field_24360));
-			context.getSource().method_45068(class_2561.method_43470("[링크]").method_10862(class_2583.field_24360.method_10982(true).method_10977(class_124.field_1078).method_30938(true).method_10958(new class_2558(class_2558.class_2559.field_11749, "https://drive.google.com/file/d/1uyGYOYv-nB-hOKWA6pcWpuPnxSIxGvcy/view?usp=sharing"))));
+			try {
+				URI i = new URI("https://drive.google.com/file/d/1uyGYOYv-nB-hOKWA6pcWpuPnxSIxGvcy/view?usp=sharing");
+				context.getSource().method_45068(class_2561.method_43470("").method_27693("자주 쓰이는 커맨드를 더 빠르게 칠 수 있게 해줍니다. /qh를 치시면 사용할 수 있는 명령어들을 보여줍니다. 싱글 전용이라서 멀티에서 자주 쓰이는 커맨드는 지원하지 않습니다. (애초에 서버에선 이거 못씁니다.)\n\nComponent 관련은 그냥 NBTAutoComplete 모드로...\n\n서버에 몇가지 기능을 추가해 주는 ").method_10862(class_2583.field_24360).method_27693("제가 만든 플러그인도 사용해 보세요.").method_10862(class_2583.field_24360));
+				context.getSource().method_45068(class_2561.method_43470("[링크]").method_10862(class_2583.field_24360.method_10982(true).method_10977(class_124.field_1078).method_30938(true).method_10958(new class_2558.class_10608(i))));
+			} catch (URISyntaxException e) {
+				System.out.println("이거 발생할 일 없음");
+			}
 		}
 
 
@@ -145,7 +156,7 @@ public class quick_commands implements ModInitializer {
 				case "truth", "진실" -> context.getSource().method_45068(class_2561.method_43470("169.9"));
 				case "false", "거짓" -> context.getSource().method_45068(class_2561.method_43470("170"));
 				case "wer" ->
-						context.getSource().method_45068(class_2561.method_43470("QWER?").method_10862(class_2583.field_24360.method_30938(true).method_10977(class_124.field_1075).method_30938(true).method_10958(new class_2558(class_2558.class_2559.field_11749, "https://www.youtube.com/@QWER_Band_official"))));
+						context.getSource().method_45068(class_2561.method_43470("Q, W, E, R !"));
 				case "tuber" -> context.getSource().method_45068(class_2561.method_43470("1997년 9월 11일!"));
 				case "tp" -> context.getSource().method_45068(class_2561.method_43470("그정도는그냥쓰시죠..."));
 				case "hitomi", "뭐가 나올까" -> {
@@ -154,6 +165,9 @@ public class quick_commands implements ModInitializer {
 				}
 				case "youtube" -> sauce.method_45068(class_2561.method_43470(chat + random_youtube()));
 				case "sent" -> {
+
+
+
 					char uniVal = args2.charAt(args2.length() - 1);
 					String jng;
 					if (uniVal >= 0xAC00) {
@@ -161,7 +175,7 @@ public class quick_commands implements ModInitializer {
 
 //						char cho = (char) (uniVal / 28 / 21);ㅁ
 	//					char joong = (char) ((uniVal) / 28 % 21);
-						char jong = (char) (uniVal % 28);    // 이거 예전에 어디서 복붙했던건데 까먹음
+						char jong = (char) (uniVal % 28);
 
 						jng = JONG[jong];
 					} else {
@@ -171,6 +185,9 @@ public class quick_commands implements ModInitializer {
 					if (jng.equals("없음") || jng.equals("")) josa = "가";
 					else josa = "이";
 					sauce.method_45068(class_2561.method_43470(chat + random_sentence(args2, josa)));
+
+
+
 				}
 				case "recipe" -> {
 					String[] main = {"돼지고기", "소고기", "치킨", "통닭", "식빵", "햄버거빵", "라면", "파스타 면", "김치", "밀가루 반죽", "참치", "연어", "쌀", "두부", "망고", "감자", "호박", "고래고기", "샥스핀", "스팸", "소시지", "베이컨", "오징어", "랍스터", "게", "새우", "귀뚜라미", "독버섯"};
@@ -435,9 +452,9 @@ public class quick_commands implements ModInitializer {
 							command = "/execute at @a[tag=quick_command_executor] run summon " + entity + " ~ ~ ~ {NoBasePlate:1,ShowArms:1,NoGravity:1,Invulnerable:1,Tags:[\"" + args3 + "\",\"" + args4 + "\"]}";
 					} else {
 						if (args4.equals("null"))
-							command = "/execute at @a[tag=quick_command_executor] run summon " + entity + " ~ ~ ~ {NoAI:1,Silent:1,Tags:[\"" + args3 + "\"]}";
+							command = "/execute at @a[tag=quick_command_executor] run summon " + entity + " ~ ~ ~ {PersistenceRequired:1b,NoAI:1,Silent:1,Tags:[\"" + args3 + "\"]}";
 						else
-							command = "/execute at @a[tag=quick_command_executor] run summon " + entity + " ~ ~ ~ {NoAI:1,Silent:1,Tags:[\"" + args3 + "\",\"" + args4 + "\"]}";
+							command = "/execute at @a[tag=quick_command_executor] run summon " + entity + " ~ ~ ~ {PersistenceRequired:1b,NoAI:1,Silent:1,Tags:[\"" + args3 + "\",\"" + args4 + "\"]}";
 					}
 
 
@@ -454,8 +471,71 @@ public class quick_commands implements ModInitializer {
 					if (entity.equals("armor_stand"))
 						run_command("/execute at @a[tag=quick_command_executor] run summon " + entity + " ~ ~ ~ {NoBasePlate:1,ShowArms:1,NoGravity:1,Invulnerable:1}", context);
 					else
-						run_command("/execute at @a[tag=quick_command_executor] run summon " + entity + " ~ ~ ~ {NoAI:1,Silent:1}", context);
+						run_command("/execute at @a[tag=quick_command_executor] run summon " + entity + " ~ ~ ~ {NoAI:1,Silent:1,PersistenceRequired:1b}", context);
 					sauce.method_9226(() -> class_2561.method_43470(chat + "테스트용 엔티티 §a%s§f을(를) 소환했습니다.".formatted(finalEntity)), false);
+				}
+			}
+
+			else if (args1.equals("tsi")) {
+				String entity = "";
+				String list = entits.entity_list;
+				String[] line = list.split("\\R");
+				if (is_this_number(args2.replace(".", ""))) {
+
+					String input = args2.replace(".", " ; ");
+
+					if (list.contains(input)) {
+						for (String s : line) {
+							if (s.startsWith(input)) {
+								entity = s.split(" ; ")[3];
+								break;
+							}
+						}
+					} else send_error_message(context, "그런 엔티티 없는데요..");
+				} else {
+					if (list.contains("; " + args2)) {
+						for (String s : line) {
+							if (s.contains("; " + args2)) {
+								entity = s.split(" ; ")[3];
+							}
+						}
+					} else entity = args2;
+				}
+
+
+				String finalEntity = entity;
+				String command;
+				if (!args3.equals("null")) {
+
+
+					if (entity.equals("armor_stand")) {
+						if (args4.equals("null"))
+							command = "/execute at @a[tag=quick_command_executor] run summon " + entity + " ~ ~ ~ {NoBasePlate:1,ShowArms:1,NoGravity:1,Invulnerable:1,Tags:[\"" + args3 + "\"]}";
+						else
+							command = "/execute at @a[tag=quick_command_executor] run summon " + entity + " ~ ~ ~ {NoBasePlate:1,ShowArms:1,NoGravity:1,Invulnerable:1,Tags:[\"" + args3 + "\",\"" + args4 + "\"]}";
+					} else {
+						if (args4.equals("null"))
+							command = "/execute at @a[tag=quick_command_executor] run summon " + entity + " ~ ~ ~ {PersistenceRequired:1b,NoAI:1,Invulnerable:1b,Silent:1,Tags:[\"" + args3 + "\"]}";
+						else
+							command = "/execute at @a[tag=quick_command_executor] run summon " + entity + " ~ ~ ~ {PersistenceRequired:1b,NoAI:1,Invulnerable:1b,Silent:1,Tags:[\"" + args3 + "\",\"" + args4 + "\"]}";
+					}
+
+
+					run_command(command, context);
+					if (args4.equals("null")) {
+						String finalArgs3 = args3;
+						sauce.method_9226(() -> class_2561.method_43470(chat + "태그가 §a%s§f인 테스트용 엔티티 §b%s§f을(를) 소환했습니다.".formatted(finalArgs3, finalEntity)), false);
+					}
+					else {
+						String finalArgs2 = args3;
+						sauce.method_9226(() -> class_2561.method_43470(chat + "태그가 §a%s, %s§f인 테스트용 엔티티 §b%s§f을(를) 소환했습니다.".formatted(finalArgs2, args4, finalEntity)), false);
+					}
+				} else {
+					if (entity.equals("armor_stand"))
+						run_command("/execute at @a[tag=quick_command_executor] run summon " + entity + " ~ ~ ~ {NoBasePlate:1,ShowArms:1,NoGravity:1,Invulnerable:1}", context);
+					else
+						run_command("/execute at @a[tag=quick_command_executor] run summon " + entity + " ~ ~ ~ {NoAI:1,Silent:1,Invulnerable:1b,PersistenceRequired:1b}", context);
+					sauce.method_9226(() -> class_2561.method_43470(chat + "무적인 테스트용 엔티티 §a%s§f을(를) 소환했습니다.".formatted(finalEntity)), false);
 				}
 			}
 
@@ -549,7 +629,7 @@ public class quick_commands implements ModInitializer {
 					String finalText = text;
 
 					sauce.method_9226(() -> class_2561.method_43470(chat + "§a%s§f 텍스트 디스플레이를 소환했습니다.".formatted(finalText)), false);
-					run_command("/execute at @a[tag=quick_command_executor] run summon text_display ~ ~ ~ {shadow:1,Rotation:" + dir + ",text:'" + args2 + "'}", context);
+					run_command("/execute at @a[tag=quick_command_executor] run summon text_display ~ ~ ~ {shadow:1,Rotation:" + dir + ",text:" + args2 + "}", context);
 
 				}
 
@@ -572,17 +652,17 @@ public class quick_commands implements ModInitializer {
 
 					if (args4.equals("null")) {
 						sauce.method_9226(() -> class_2561.method_43470(chat + "§a%s§f 텍스트 디스플레이를 소환했습니다.".formatted(finalText1)), false);
-						run_command("/execute at @a[tag=quick_command_executor] run summon text_display ~ ~ ~ {shadow:1,Rotation:" + dir + ",text:'" + args2 + "',background:" + bg + "}", context);
+						run_command("/execute at @a[tag=quick_command_executor] run summon text_display ~ ~ ~ {shadow:1,Rotation:" + dir + ",text:" + args2 + ",background:" + bg + "}", context);
 					}
 
 					else if (args5.equals("null")) {
 						sauce.method_9226(() -> class_2561.method_43470(chat + "태그가 §a%s§f인 §b%s§f 텍스트 디스플레이를 소환했습니다.".formatted(args4, finalText1)), false);
-						run_command("/execute at @a[tag=quick_command_executor] run summon text_display ~ ~ ~ {shadow:1,Rotation:" + dir + ",text:'" + args2 + "',background:" + bg + ",Tags:[\"" + args4 + "\"]}", context);
+						run_command("/execute at @a[tag=quick_command_executor] run summon text_display ~ ~ ~ {shadow:1,Rotation:" + dir + ",text:" + args2 + ",background:" + bg + ",Tags:[\"" + args4 + "\"]}", context);
 					}
 
 					else {
 						sauce.method_9226(() -> class_2561.method_43470(chat + "태그가 §a%s, %s§f인 §b%s§f 텍스트 디스플레이를 소환했습니다.".formatted(args4, args5, finalText1)), false);
-						run_command("/execute at @a[tag=quick_command_executor] run summon text_display ~ ~ ~ {shadow:1,Rotation:" + dir + ",text:'" + args2 + "',background:" + bg + ",Tags:[\"" + args4 + "\",\"" + args5 + "\"]}", context);
+						run_command("/execute at @a[tag=quick_command_executor] run summon text_display ~ ~ ~ {shadow:1,Rotation:" + dir + ",text:" + args2 + ",background:" + bg + ",Tags:[\"" + args4 + "\",\"" + args5 + "\"]}", context);
 					}
 				}
 
@@ -605,9 +685,9 @@ public class quick_commands implements ModInitializer {
 						String command4, command5, command6;
 
 						if (send_feedback(context)) {
-							command4 = "/execute as @a[tag=quick_command_executor] at @s run tellraw @s [\"" + chat + "\",{\"selector\":\"@n[tag=" + args3.replace("\"", "") + " ]\"},\"에게서 §a" + args3.replace("\"", "") + "§f 태그를 제거했습니다.\"]";
-							command5 = "/execute as @a[tag=quick_command_executor] at @s run tellraw @s [\"" + chat + "\",{\"selector\":\"@n[tag=" + args4.replace("\"", "") + " ]\"},\"에게서 §a" + args4.replace("\"", "") + "§f 태그를 제거했습니다.\"]";
-							command6 = "/execute as @a[tag=quick_command_executor] at @s run tellraw @s [\"" + chat + "\",{\"selector\":\"@n[tag=" + args5.replace("\"", "") + " ]\"},\"에게서 §a" + args5.replace("\"", "") + "§f 태그를 제거했습니다.\"]";
+							command4 = "/execute as @a[tag=quick_command_executor] at @s run tellraw @s [\"" + chat + "\",{\"selector\":\"@n[tag=" + args3.replace("\"", "") + "]\"},\"에게서 §a" + args3.replace("\"", "") + "§f 태그를 제거했습니다.\"]";
+							command5 = "/execute as @a[tag=quick_command_executor] at @s run tellraw @s [\"" + chat + "\",{\"selector\":\"@n[tag=" + args4.replace("\"", "") + "]\"},\"에게서 §a" + args4.replace("\"", "") + "§f 태그를 제거했습니다.\"]";
+							command6 = "/execute as @a[tag=quick_command_executor] at @s run tellraw @s [\"" + chat + "\",{\"selector\":\"@n[tag=" + args5.replace("\"", "") + "]\"},\"에게서 §a" + args5.replace("\"", "") + "§f 태그를 제거했습니다.\"]";
 
 						}
 						else {
@@ -626,8 +706,8 @@ public class quick_commands implements ModInitializer {
 						String command3, command4;
 
 						if (send_feedback(context)) {
-							command3 = "/execute as @a[tag=quick_command_executor] at @s run tellraw @s [\"" + chat + "\",{\"selector\":\"@n[tag=" + args3.replace("\"", "") + " ]\"},\"에게서 §a" + args3.replace("\"", "") + "§f 태그를 제거했습니다.\"]";
-							command4 = "/execute as @a[tag=quick_command_executor] at @s run tellraw @s [\"" + chat + "\",{\"selector\":\"@n[tag=" + args4.replace("\"", "") + " ]\"},\"에게서 §a" + args4.replace("\"", "") + "§f 태그를 제거했습니다.\"]";
+							command3 = "/execute as @a[tag=quick_command_executor] at @s run tellraw @s [\"" + chat + "\",{\"selector\":\"@n[tag=" + args3.replace("\"", "") + "]\"},\"에게서 §a" + args3.replace("\"", "") + "§f 태그를 제거했습니다.\"]";
+							command4 = "/execute as @a[tag=quick_command_executor] at @s run tellraw @s [\"" + chat + "\",{\"selector\":\"@n[tag=" + args4.replace("\"", "") + "]\"},\"에게서 §a" + args4.replace("\"", "") + "§f 태그를 제거했습니다.\"]";
 
 						}
 						else {
@@ -646,7 +726,7 @@ public class quick_commands implements ModInitializer {
 						String command2;
 
 						if (send_feedback(context))
-							command2 = "/execute as @a[tag=quick_command_executor] at @s run tellraw @s [\"" + chat + "\",{\"selector\":\"@n[type=tag=]\"},\"에게서 §a" + args3.replace("\"", "") + " §f태그를 제거했습니다.\"]";
+							command2 = "/execute as @a[tag=quick_command_executor] at @s run tellraw @s [\"" + chat + "\",{\"selector\":\"@n[tag=" + args3.replace("\"", "") + "]\"},\"에게서 §a" + args3.replace("\"", "") + " §f태그를 제거했습니다.\"]";
 						else command2 = "";
 
 						run_commands(command2, command1, "", context);
@@ -719,8 +799,8 @@ public class quick_commands implements ModInitializer {
 			else if (args1.equals("ench")) {
 
 				String item = Objects.requireNonNull(sauce.method_44023()).method_6047().method_7909().toString();
-				run_command("/item replace entity @a[tag=quick_command_executor] weapon.mainhand with " + item + "[enchantments={levels:{protection:255,bane_of_arthropods:255,blast_protection:255,breach:255,channeling:255,density:255,depth_strider:255,efficiency:255,feather_falling:255,fire_aspect:255,fire_protection:255,flame:255,fortune:255,frost_walker:255,impaling:255,infinity:255,knockback:255,looting:255,loyalty:255,luck_of_the_sea:255,lure:255,mending:1,multishot:100,piercing:255,power:255,projectile_protection:255,protection:255,punch:255,quick_charge:5,respiration:255,riptide:255,sharpness:255,silk_touch:255,smite:255,soul_speed:255,sweeping_edge:255,swift_sneak:255,thorns:255,unbreaking:255,wind_burst:255}}]", context);
-				sauce.method_9226(() -> class_2561.method_43470(chat + "손에 든 §a%s§b을(를) 마검으로 만들었습니다.".formatted(item)), false);
+				run_command("/item replace entity @a[tag=quick_command_executor] weapon.mainhand with " + item + "[enchantments={protection:255,bane_of_arthropods:255,blast_protection:255,breach:255,channeling:255,density:255,depth_strider:255,efficiency:255,feather_falling:255,fire_aspect:255,fire_protection:255,flame:255,fortune:255,frost_walker:255,impaling:255,infinity:255,knockback:255,looting:255,loyalty:255,luck_of_the_sea:255,lure:255,mending:1,multishot:100,piercing:255,power:255,projectile_protection:255,protection:255,punch:255,quick_charge:5,respiration:255,riptide:255,sharpness:255,silk_touch:255,smite:255,soul_speed:255,sweeping_edge:255,swift_sneak:255,thorns:255,unbreaking:255,wind_burst:255}]", context);
+				sauce.method_9226(() -> class_2561.method_43470(chat + "손에 든 §a%s§f을(를) 마검으로 만들었습니다.".formatted(item)), false);
 
 
 			}
@@ -734,7 +814,6 @@ public class quick_commands implements ModInitializer {
 				else {
 
 
-					mes = mes.substring(1, mes.length() - 1);
 
 
 					int length = (int) Math.round(((double) mes.length() / 6));
@@ -810,7 +889,7 @@ public class quick_commands implements ModInitializer {
 
 					String finalMes = mes;
 					sauce.method_9226(() -> class_2561.method_43470(chat + finalMes + "의 무지개색 텍스트가 생성되었습니다. 눌러서 복사하세요."), false);
-					sauce.method_9226(() -> class_2561.method_43470(chat + "[클릭]").method_10862(class_2583.field_24360.method_10958(new class_2558(class_2558.class_2559.field_21462, finalMes2)).method_30938(true).method_10977(class_124.field_1054).method_10982(true)), false);
+					sauce.method_9226(() -> class_2561.method_43470(chat + "[클릭]").method_10862(class_2583.field_24360.method_10958(new class_2558.class_10606(finalMes2)).method_30938(true).method_10977(class_124.field_1054).method_10982(true)), false);
 
 
 				}
@@ -897,7 +976,7 @@ public class quick_commands implements ModInitializer {
 					String finalInput = input;
 					sauce.method_9226(() -> class_2561.method_43470(chat + "%s의 그라데이션 텍스트가 생성되었습니다. 눌러서 복사하세요.".formatted(finalInput)), false);
 					String finalOutput = output.toString();
-					sauce.method_9226(() -> class_2561.method_43470(chat + "[클릭]").method_10862(class_2583.field_24360.method_10958(new class_2558(class_2558.class_2559.field_21462, finalOutput)).method_30938(true).method_10977(class_124.field_1054).method_10982(true)), false);
+					sauce.method_9226(() -> class_2561.method_43470(chat + "[클릭]").method_10862(class_2583.field_24360.method_10958(new class_2558.class_10606(finalOutput)).method_30938(true).method_10977(class_124.field_1054).method_10982(true)), false);
 
 
 				} catch (ArrayIndexOutOfBoundsException e) {
@@ -1143,7 +1222,7 @@ public class quick_commands implements ModInitializer {
 						if (ceiling.equals("null")) ceiling = "air";
 
 
-						run_more_commands("/execute at @a[tag=quick_command_executor] run fill ~ ~-1 ~ ~6 ~4 ~6 " + wall + " replace air", "/execute at @a[tag=quick_command_executor] run fill ~1 ~ ~1 ~5 ~3 ~5 air replace " + wall, "/execute at @a[tag=quick_command_executor] run fill ~ ~-1 ~ ~6 ~-1 ~6 " + floor, "/execute at @a[tag=quick_command_executor] run fill ~1 ~4 ~1 ~5 ~4 ~5 " + ceiling, "/execute at @a[tag=quick_command_executor] run setblock ~5 ~ ~1 minecraft:chest[facing=west,type=single,waterlogged=false]{Items:[{Slot:13b,count:64,id:\"minecraft:paper\"}]}", "/execute at @a[tag=quick_command_executor] run setblock ~1 ~-1 ~5 hopper", "/execute at @a[tag=quick_command_executor] run setblock ~1 ~2 ~2 birch_wall_sign[facing=east]{is_waxed:true,front_text:{messages:['\"\"','\"정답\"','\"\"','\"\"']}}", "/execute at @a[tag=quick_command_executor] run setblock ~1 ~2 ~4 birch_wall_sign[facing=east]{is_waxed:true,front_text:{messages:['\"\"','\"힌트\"','\"\"','\"\"']}}", "/execute at @a[tag=quick_command_executor] run setblock ~4 ~-1 ~6 repeater[facing=east]", context);
+						run_more_commands("/execute at @a[tag=quick_command_executor] run fill ~ ~-1 ~ ~6 ~4 ~6 " + wall + " replace air", "/execute at @a[tag=quick_command_executor] run fill ~1 ~ ~1 ~5 ~3 ~5 air replace " + wall, "/execute at @a[tag=quick_command_executor] run fill ~ ~-1 ~ ~6 ~-1 ~6 " + floor, "/execute at @a[tag=quick_command_executor] run fill ~1 ~4 ~1 ~5 ~4 ~5 " + ceiling, "/execute at @a[tag=quick_command_executor] run setblock ~5 ~ ~1 minecraft:chest[facing=west,type=single,waterlogged=false]{Items:[{Slot:13b,count:64,id:\"minecraft:paper\"}]}", "/execute at @a[tag=quick_command_executor] run setblock ~1 ~-1 ~5 hopper", "/execute at @a[tag=quick_command_executor] run setblock ~1 ~2 ~2 birch_wall_sign[facing=east]{is_waxed:true,front_text:{messages:[\"\",\"정답\",\"\",\"\"]}}", "/execute at @a[tag=quick_command_executor] run setblock ~1 ~2 ~4 birch_wall_sign[facing=east]{is_waxed:true,front_text:{messages:[\"\",\"힌트\",\"\",\"\"]}}", "/execute at @a[tag=quick_command_executor] run setblock ~4 ~-1 ~6 repeater[facing=east]", context);
 
 
 						place_command_block(context, "/execute if blocks ~2 ~ ~ ~2 ~ ~ ~7 ~-1 ~ masked run setblock ~11 ~-1 ~1 minecraft:redstone_block", x - 6, y, z + 5, 2, "up");
@@ -1253,6 +1332,95 @@ public class quick_commands implements ModInitializer {
 				}
 
 
+			}
+
+			else if(args1.equals("e")) {
+				String dur, ef;
+				if(args3.equals("i")) dur = "infinite";
+				else dur = args3;
+
+				if(args2.equals("1")) ef = "speed";
+				else if(args2.equals("2")) ef = "slowness";
+				else if(args2.equals("3")) ef = "haste";
+				else if(args2.equals("4")) ef = "mining_fatigue";
+				else if(args2.equals("5")) ef = "strength";
+				else if(args2.equals("6")) ef = "instant_health";
+				else if(args2.equals("7")) ef = "instant_damage";
+				else if(args2.equals("8")) ef = "jump_boost";
+				else if(args2.equals("9")) ef = "nausea";
+				else if(args2.equals("10")) ef = "regeneration";
+				else if(args2.equals("11")) ef = "resistance";
+				else if(args2.equals("12")) ef = "fire_resistance";
+				else if(args2.equals("13")) ef = "water_breathing";
+				else if(args2.equals("14")) ef = "invisibility";
+				else if(args2.equals("15")) ef = "blindness";
+				else if(args2.equals("16")) ef = "night_vision";
+				else if(args2.equals("17")) ef = "hunger";
+				else if(args2.equals("18")) ef = "weakness";
+				else if(args2.equals("19")) ef = "poison";
+				else if(args2.equals("20")) ef = "wither";
+				else if(args2.equals("21")) ef = "health_boost";
+				else if(args2.equals("22")) ef = "absorption";
+				else if(args2.equals("23")) ef = "saturation";
+				else if(args2.equals("24")) ef = "glowing";
+				else if(args2.equals("25")) ef = "levitation";
+				else if(args2.equals("26")) ef = "luck";
+				else if(args2.equals("27")) ef = "bad_luck";
+				else if(args2.equals("28")) ef = "slow_falling";
+				else if(args2.equals("29")) ef = "conduit_power";
+				else if(args2.equals("30")) ef = "dolphins_grace";
+				else if(args2.equals("31")) ef = "bad_omen";
+				else if(args2.equals("32")) ef = "hero_of_the_village";
+				else if(args2.equals("33")) ef = "darkness";
+				else if(args2.equals("34")) ef = "infested";
+				else if(args2.equals("35")) ef = "oozing";
+				else if(args2.equals("36")) ef = "weaving";
+				else if(args2.equals("37")) ef = "wind_charged";
+				else if(args2.equals("38")) ef = "raid_omen";
+				else if(args2.equals("39")) ef = "trial_omen";
+				else ef = "";
+
+
+
+
+				int amp;
+				if(!is_this_number(args4)) amp = 0;
+				if(args4.equals("null")) amp = 0;
+				else amp = Integer.parseInt(args4);
+
+
+
+				String command = "/effect give @a[tag=quick_command_executor] " + ef + " " + dur + " " + amp + " true";
+				if(send_feedback(context)) {
+					int finalAmp = amp;
+					sauce.method_9226(() -> class_2561.method_43470(chat + "§d" + finalAmp + "§f 짜리 " + "§a" + ef + "§f " + "을(를) §b" + dur + "§f 동안 부여했습니다."), false);
+				}
+				run_command(command, context);
+
+
+
+
+
+
+
+
+			}
+
+
+			else if(args1.equals("wr")) {
+				write_text(context, args2, args3, args4);
+			}
+
+			else if(args1.equals("g")) {
+				// give @s args2[item_name={args3},lore=[{args4},{args5}]]
+				String item;
+				if(is_this_number(args2.replaceFirst("\\.", ""))) item = convert_number_to_item(args2);
+				else if(args2.equals("null")) item = "stone";
+				else item = args2;
+
+				String command = "/give @a[tag=quick_command_executor] " + item + "[item_name=" + args3 + ",lore=[{\"color\":\"gray\",\"italic\":false,\"text\":\"" + args4 + "\"},{\"color\":\"gray\",\"italic\":false,\"text\":\"" + args5 + "\"}]]";
+				sauce.method_9226(() -> class_2561.method_43470(chat + "아이템 이름과 설명이 쓰여진 " + item + "을(를) 지급했습니다."), false);
+				run_command(command, context);
 			}
 
 

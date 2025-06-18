@@ -30,16 +30,24 @@ public class suggestions_help implements SuggestionProvider<class_2168> {
         builder.suggest("q_gd");
         builder.suggest("q_gr");
         builder.suggest("q_gen");
-        builder.suggest("q_ETC");
         builder.suggest("qd_NUMBER");
         builder.suggest("qd_STRING");
         builder.suggest("qd_inv");
         builder.suggest("qd_ai");
         builder.suggest("qd_as");
         builder.suggest("qd_t");
+        builder.suggest("qd_ti");
+        builder.suggest("qd_pr");
         builder.suggest("qd_i");
         builder.suggest("q_tp");
         builder.suggest("qd_r");
+        builder.suggest("qd_g");
+        builder.suggest("q_wr");
+        builder.suggest("q_e");
+        builder.suggest("q_g");
+        builder.suggest("q_tsi");
+        builder.suggest("q_youtube");
+        builder.suggest("q_recipe");
 
 
 

@@ -8,8 +8,8 @@
 		"chstone12"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://google.com",
+		"sources": "https://github.com/chstone12/quick_commands"
 	},
 	"license": "내꺼임 ㅡㅡ (2차배포 시 사망)",
 	"icon": "assets/quick_commands/icon.png",
